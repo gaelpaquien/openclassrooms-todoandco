@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www/html
+    environment:
+      DATABASE_HOST: db
+    depends_on:
+      - db
+      - mailhog
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: todo
+      MYSQL_PASSWORD: password
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+
+volumes:
+  db_data: {}
