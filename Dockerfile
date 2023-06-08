@@ -1,4 +1,4 @@
-# Dockerfile
+# Install PHP 7.1 and Apache
 FROM php:7.1-apache
 
 # Install system dependencies
@@ -25,7 +25,11 @@ WORKDIR /var/www/html
 
 # Copy application source
 COPY . /var/www/html
+
+# Give permission to www-data user
 RUN chown -R www-data:www-data /var/www/html
+
+# Create a new apache configuration file
 RUN echo '\
 <Directory /var/www/html/web>\n\
     Options Indexes FollowSymLinks\n\
@@ -34,10 +38,9 @@ RUN echo '\
     DirectoryIndex app.php index.php index.html\n\
 </Directory>\n\
 ' > /etc/apache2/conf-available/symfony.conf
+
+# Enable Apache symfony configuration
 RUN a2enconf symfony
 
 # Change default apache document root from /var/www/html to /var/www/html/web
 RUN sed -i 's#/var/www/html#/var/www/html/web#g' /etc/apache2/sites-available/000-default.conf
-
-# Install app dependencies
-RUN composer install
