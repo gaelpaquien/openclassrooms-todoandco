@@ -35,7 +35,7 @@ RUN echo '\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\
-    DirectoryIndex app.php index.php index.html\n\
+    DirectoryIndex app_dev.php\n\
 </Directory>\n\
 ' > /etc/apache2/conf-available/symfony.conf
 
