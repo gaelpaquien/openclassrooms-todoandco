@@ -8,6 +8,10 @@ services:
       - .:/var/www/html
     environment:
       DATABASE_HOST: db
+      NEW_RELIC_APP_NAME: "Todo"
+      NEW_RELIC_LICENSE_KEY: "eu01xx874a59ed7559bf15c2d0efa5febbecNRAL"
+      NEW_RELIC_LOG_LEVEL: "info"
+      NEW_RELIC_DAEMON_LOG_LEVEL: "info"
     depends_on:
       - db
       - mailhog
@@ -28,6 +32,17 @@ services:
     image: mailhog/mailhog
     ports:
       - 8025:8025
+
+  newrelic-infra:
+    image: newrelic/infrastructure:latest
+    network_mode: host
+    pid: host
+    privileged: true
+    volumes:
+      - "/:/host:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      NRIA_LICENSE_KEY: "eu01xx874a59ed7559bf15c2d0efa5febbecNRAL"
 
 volumes:
   db_data: {}
