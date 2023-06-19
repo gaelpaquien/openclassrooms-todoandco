@@ -6,12 +6,8 @@ services:
       - 8080:80
     volumes:
       - .:/var/www/html
-    environment:
-      DATABASE_HOST: db
-      NEW_RELIC_APP_NAME: "Todo"
-      NEW_RELIC_LICENSE_KEY: "eu01xx874a59ed7559bf15c2d0efa5febbecNRAL"
-      NEW_RELIC_LOG_LEVEL: "info"
-      NEW_RELIC_DAEMON_LOG_LEVEL: "info"
+    env_file:
+      - .env.local
     depends_on:
       - db
       - mailhog
@@ -22,11 +18,8 @@ services:
       - db_data:/var/lib/mysql
     ports:
       - 3310:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: symfony
-      MYSQL_USER: todo
-      MYSQL_PASSWORD: password
+    env_file:
+      - .env.local
 
   mailhog:
     image: mailhog/mailhog
@@ -41,8 +34,8 @@ services:
     volumes:
       - "/:/host:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
-    environment:
-      NRIA_LICENSE_KEY: "eu01xx874a59ed7559bf15c2d0efa5febbecNRAL"
+    env_file:
+      - .env.local
 
 volumes:
   db_data: {}
