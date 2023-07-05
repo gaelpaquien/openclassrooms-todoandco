@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y \
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql zip
 
+# Modify PHP configuration (memory_limit = -1)
+RUN echo "memory_limit = -1" >> /usr/local/etc/php/php.ini
+
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
