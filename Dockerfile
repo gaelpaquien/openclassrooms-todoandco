@@ -21,7 +21,7 @@ RUN a2enmod rewrite
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.10.20
 
 # Install New Relic Agent
-RUN curl -L https://download.newrelic.com/php_agent/release/newrelic-php5-10.10.0.1-linux.tar.gz | tar -C /tmp -zx && \
+RUN curl -L https://download.newrelic.com/php_agent/release/newrelic-php5-10.11.0.3-linux.tar.gz | tar -C /tmp -zx && \
     export NR_INSTALL_USE_CP_NOT_LN=1 && \
     export NR_INSTALL_SILENT=1 && \
     export NR_INSTALL_KEY="eu01xx874a59ed7559bf15c2d0efa5febbecNRAL" && \
