@@ -9,18 +9,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @package AppBundle\Command
- *
- * @Symfony\Component\DependencyInjection\Annotation\Service(
- *     public=true,
- *     tags={"console.command"}
- * )
- */
 class UpdateTaskAuthorCommand extends Command
 {
-    protected static $defaultName = 'app:update-task-author';
-
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -33,7 +23,7 @@ class UpdateTaskAuthorCommand extends Command
     protected function configure()
     {
         $this
-            ->setName(self::$defaultName)
+            ->setName('app:update-task-author')
             ->setDescription('Mettre à jour les tâches qui n\'ont pas d\'auteur et définir l\'auteur sur l\'utilisateur anonyme')
             ->setHelp('Cette commande permet de mettre à jour les tâches qui n\'ont pas d\'auteur et définir l\'auteur sur l\'utilisateur anonyme');
     }
@@ -59,7 +49,7 @@ class UpdateTaskAuthorCommand extends Command
 
         $this->entityManager->flush();
 
-        $output->writeln(count($tasks).' a été modifiée avec succès');
+        $output->writeln(count($tasks).' tâches ont été modifiées avec succès');
 
         return 0; // Equivalent to returning Command::SUCCESS
     }
