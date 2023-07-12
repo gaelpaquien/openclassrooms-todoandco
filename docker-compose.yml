@@ -9,13 +9,13 @@ services:
     env_file:
       - .env.local
     depends_on:
-      - db
+      - database
       - mailhog
 
-  db:
+  database:
     image: mysql:5.7
     volumes:
-      - db_data:/var/lib/mysql
+      - database_data:/var/lib/mysql
     ports:
       - 3310:3306
     env_file:
@@ -38,4 +38,4 @@ services:
       - .env.local
 
 volumes:
-  db_data: {}
+  database_data: {}

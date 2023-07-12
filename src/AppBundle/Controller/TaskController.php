@@ -24,6 +24,17 @@ class TaskController extends Controller
     public function createAction(Request $request)
     {
         $task = new Task();
+
+        // Check if the user is logged in
+        if (!$this->getUser()) {
+            $this->addFlash('error', 'Vous devez être connecté pour créer une tâche.');
+
+            return $this->redirectToRoute('task_list');
+        }
+
+        // Set the author on the task
+        $task->setAuthor($this->getUser());
+
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
