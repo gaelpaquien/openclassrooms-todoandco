@@ -42,7 +42,7 @@ class Task
     private $isDone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="task")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
