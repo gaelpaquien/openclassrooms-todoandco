@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
+use AppBundle\Entity\User;
 use AppBundle\Form\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -58,6 +59,13 @@ class TaskController extends Controller
      */
     public function editAction(Task $task, Request $request)
     {
+        // Check if the user is the author of the task
+        if ($this->getUser() !== $task->getAuthor()) {
+            $this->addFlash('error', 'Vous ne pouvez pas modifier une tâche dont vous n\'êtes pas l\'auteur.');
+
+            return $this->redirectToRoute('task_list');
+        }
+
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
@@ -95,6 +103,26 @@ class TaskController extends Controller
     public function deleteTaskAction(Task $task)
     {
         $em = $this->getDoctrine()->getManager();
+        $anonymousAuthor = $em->getRepository(User::class)->findOneBy(['email' => 'anonymous@email.com']);
+
+        // If task is not anonymous, check if the user is the author of the task
+        if ($task->getAuthor()->getEmail() !== $anonymousAuthor->getEmail()) {
+            if ($this->getUser()->getId() !== $task->getAuthor()->getId()) {
+                $this->addFlash('error', 'Vous ne pouvez pas supprimer une tâche dont vous n\'êtes pas l\'auteur.');
+
+                return $this->redirectToRoute('task_list');
+            }
+        }
+
+        // If author task is anonymous, check if the user is admin
+        if ($task->getAuthor()->getEmail() === $anonymousAuthor->getEmail()) {
+            if (!$this->isGranted('ROLE_ADMIN')) {
+                $this->addFlash('error', 'Seul un administrateur peut supprimer une tâche dont l\'auteur est anonyme.');
+
+                return $this->redirectToRoute('task_list');
+            }
+        }
+
         $em->remove($task);
         $em->flush();
 
