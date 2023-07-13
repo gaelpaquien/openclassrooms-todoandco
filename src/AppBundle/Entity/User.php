@@ -47,7 +47,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      */
-    private $roles;
+    private $roles = 'ROLE_USER';
 
 
     public function getId()
