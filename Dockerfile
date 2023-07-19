@@ -17,6 +17,12 @@ RUN docker-php-ext-install pdo pdo_mysql zip
 # Modify PHP configuration (memory_limit = -1)
 RUN echo "memory_limit = -1" >> /usr/local/etc/php/php.ini
 
+# Set sys_temp_dir
+RUN echo "sys_temp_dir = /tmp" >> /usr/local/etc/php/php.ini
+
+# Create and set permissions for tmp directory
+RUN mkdir -p /tmp && chmod 777 /tmp
+
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 

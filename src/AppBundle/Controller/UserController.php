@@ -15,6 +15,13 @@ class UserController extends Controller
      */
     public function listAction()
     {
+        // Check if user is admin
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', 'Vous devez être administrateur pour accéder à cette page.');
+
+            return $this->redirectToRoute('task_list');
+        }
+
         return $this->render('user/list.html.twig', ['users' => $this->getDoctrine()->getRepository('AppBundle:User')->findAll()]);
     }
 
@@ -49,6 +56,13 @@ class UserController extends Controller
      */
     public function editAction(User $user, Request $request)
     {
+        // Check if user is admin
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', 'Vous devez être administrateur pour accéder à cette page.');
+
+            return $this->redirectToRoute('task_list');
+        }
+
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);

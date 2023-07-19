@@ -26,6 +26,6 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/users/create, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/users, roles: ROLE_ADMIN }
+        - { path: ^/users, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/tasks, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
