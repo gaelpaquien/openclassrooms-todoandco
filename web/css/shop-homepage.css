@@ -8,7 +8,14 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
+.alert {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
 .slide-image {
+    margin-top: 15px;
+    margin-bottom: 15px;
     width: 100%;
 }
 
@@ -19,6 +26,35 @@ body {
 .carousel-control,
 .item {
     border-radius: 4px;
+}
+
+.index-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.index-btn .btn {
+    margin: 10px;
+}
+
+.task {
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .task {
+        margin-top: 50px;
+    }
+}
+
+.task-create {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 35px;
 }
 
 .caption {
