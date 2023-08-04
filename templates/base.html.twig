@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ToDo List App</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ asset('assets/css/shop-homepage.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}" defer></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/479a452331.js" crossorigin="anonymous"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <main>
+        <div class="content">
+            <nav class="navbar bg-body-tertiary fixed-top" style="background-color: #e3f2fd;">
+                <div class="container-fluid">
+                    <div class="navbar-header mx-5">
+                        <a class="navbar-brand" href="{{ path('app_default') }}">ToDo List App</a>
+                        <img src="{{ asset('assets/img/logo-oc.png') }}" alt="OpenClassrooms" />
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                {% if 'app_default' != app.request.attributes.get('_route') %}
+                                    <li class="nav-item">
+                                        <a href="{{ path('app_default')}}" class="nav-link mx-2">Accueil</a>
+                                    </li>
+                                {% endif %}
+                                {% if app.user and is_granted('ROLE_ADMIN') %}
+                                    <li class="nav-item">
+                                        <a href="{{ path('user_list') }}" class="nav-link mx-2">Liste des comptes</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if app.user %}
+                                    <li class="nav-item">
+                                        <a href="{{ path('user_edit', {'id' : app.user.id }) }}" class="nav-link mx-2">Modifier mon compte</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if app.user and 'task_create' != app.request.attributes.get('_route') %}
+                                    <li class="nav-item">
+                                        <a href="{{ path('task_create') }}" class="nav-link mx-2">Créer une tâche</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if 'task_list' != app.request.attributes.get('_route') %}
+                                    <li class="nav-item">
+                                        <a href="{{ path('task_list') }}" class="nav-link mx-2">Liste des tâches</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if not app.user and 'user_create' != app.request.attributes.get('_route') %}
+                                    <li class="nav-item">
+                                        <a href="{{ path('user_create') }}" class="nav-link mx-2">S'inscrire</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if not app.user and 'app_login' != app.request.attributes.get('_route') %}
+                                    <li class="nav-item">
+                                        <a href="{{ path('app_login') }}" class="nav-link mx-2">Se connecter</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if app.user %}
+                                    <li class="nav-item">
+                                        <a href="{{ path('app_logout') }}" class="nav-link mx-2" style="colod: #ff0000;">Se
+                                            déconnecter</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            {% block header_img %}
+                <img class="slide-image mb-4" src="{{ asset('assets/img/todolist.jpg') }}" alt="todo list">
+            {% endblock %}
+
+            {% block header_title %}{% endblock %}
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% for flash_message in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success" role="alert">
+                            <strong>Superbe !</strong> {{ flash_message }}
+                        </div>
+                        {% endfor %}
+                        {% for flash_message in app.session.flashBag.get('error') %}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Oops !</strong> {{ flash_message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="fixed-bottom d-flex justify-content-center">
+            <p class="text-center mb-0">Copyright &copy; OpenClassrooms</p>
+        </footer>
+    </main>
+</body>
+
+</html>
