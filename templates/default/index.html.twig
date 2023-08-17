@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block header_title %}
+    <h1 class="text-center mt-4 mb-4">ToDo List App, gérez vos tâches en toute simplicité !</h1>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="d-flex flex-row justify-content-center">
+                {% if app.user %}
+                    <a href="{{ path('task_create') }}" class="btn btn-primary mx-4">Créer une tâche</a>
+                {% endif %}
+                <a href="{{ path('task_list') }}" class="btn btn-primary mx-4">Liste des tâches</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
