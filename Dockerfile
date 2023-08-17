@@ -42,8 +42,8 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Permissions
-RUN chmod -R 777 /var/www/html
-RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 777 /var
+RUN chown -R www-data:www-data /var
 
 # Create a new apache configuration file
 RUN echo '\

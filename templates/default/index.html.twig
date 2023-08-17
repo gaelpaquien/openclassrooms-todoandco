@@ -8,7 +8,9 @@
     <div class="container mt-5">
         <div class="row">
             <div class="d-flex flex-row justify-content-center">
-                <a href="{{ path('task_create') }}" class="btn btn-primary mx-4">Créer une tâche</a>
+                {% if app.user %}
+                    <a href="{{ path('task_create') }}" class="btn btn-primary mx-4">Créer une tâche</a>
+                {% endif %}
                 <a href="{{ path('task_list') }}" class="btn btn-primary mx-4">Liste des tâches</a>
             </div>
         </div>

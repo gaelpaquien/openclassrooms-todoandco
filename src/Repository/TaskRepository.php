@@ -45,4 +45,13 @@ class TaskRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findAllOrderBy(string $orderBy, string $order): array
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.' . $orderBy, $order)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
