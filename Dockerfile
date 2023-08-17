@@ -2,17 +2,19 @@
 FROM php:8.2-apache
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     git \
     curl \
     unzip \
     libzip-dev \
     && docker-php-ext-install pdo pdo_mysql zip \
     && a2enmod rewrite \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql zip
+# Installation of Xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN echo "xdebug.mode = coverage" >> /usr/local/etc/php/php.ini
+RUN echo "zend_extension = xdebug" >> /usr/local/etc/php/php.ini
 
 # Modify PHP configuration (memory_limit = -1)
 RUN echo "memory_limit = -1" >> /usr/local/etc/php/php.ini
@@ -42,8 +44,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Permissions
-RUN chmod -R 777 /var
-RUN chown -R www-data:www-data /var
+RUN chmod -R 777 var && chown -R www-data:www-data var
 
 # Create a new apache configuration file
 RUN echo '\
