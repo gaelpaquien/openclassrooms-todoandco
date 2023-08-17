@@ -22,12 +22,16 @@ class TaskService
 
     public function authorIsAnonymous($task): bool
     {
+        if (!$task->getAuthor()) {
+            return true;
+        }
+
         return $task->getAuthor()->getEmail() === 'anonymous@email.com';
     }
 
     public function list(): array
     {
-        return $this->taskRepository->findAll();
+        return $this->taskRepository->findAllOrderBy('createdAt', 'DESC');
     }
 
     public function create($task): void

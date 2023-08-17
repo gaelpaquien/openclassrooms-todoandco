@@ -39,7 +39,15 @@
                                     </a>
                                 </div>
                                 <div class="card-footer">
-                                    Auteur : {{ task.author.username }}
+                                    {% if not task.author %}
+                                        Auteur : Anonyme (non assigné)
+                                    {% else %}
+                                        {% if task.author.username != 'anonymous' %}
+                                            Auteur : {{ task.author.username }}
+                                        {% else %}
+                                            Auteur : Anonyme
+                                        {% endif %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
