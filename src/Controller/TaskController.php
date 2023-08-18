@@ -111,10 +111,8 @@ class TaskController extends AbstractController
         if (!$this->taskService->authorIsAnonymous($task)) {
             if (!$this->taskService->userIsAuthor($task)) {
                 $this->addFlash('error', 'Vous ne pouvez pas modifier l\'état d\'une tâche dont vous n\'êtes pas l\'auteur.');
-
                 return $this->redirectToRoute('task_list');
             }
-            $this->addFlash('error', 'Vous ne pouvez pas modifier cette tâche.');
         }
 
         // If task author is anonymous, check if the user is admin
@@ -129,11 +127,11 @@ class TaskController extends AbstractController
         $this->taskService->toggle($task);
 
         if ($task->isDone()) {
-            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+            $this->addFlash('success', 'La tâche a bien été marquée comme terminée.');
         }
 
         if (!$task->isDone()) {
-            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non terminée.', $task->getTitle()));
+            $this->addFlash('success', 'La tâche a bien été marquée comme non terminée.');
         }
 
         return $this->redirectToRoute('task_list');
