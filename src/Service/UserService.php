@@ -30,7 +30,7 @@ class UserService
 
     public function isSameUser($user): bool
     {
-        return $this->security->getUser() === $user;
+        return $this->security->getUser() == $user;
     }
 
     public function emailExist($email): bool
@@ -38,9 +38,10 @@ class UserService
         return $this->userRepository->findOneBy(['email' => $email]) !== null;
     }
 
-    public function isSameEmail($email, $user): bool
+    public function emailTakenByAnotherUser($email, $user): bool
     {
-        return $email === $user->getEmail();
+        $foundUser = $this->userRepository->findOneBy(['email' => $email]);
+        return $foundUser && $foundUser->getId() !== $user->getId();
     }
 
     public function list(): array
@@ -55,11 +56,6 @@ class UserService
 
         $this->em->persist($user);
         $this->em->flush();
-    }
-
-    public function canEdit($user): bool
-    {
-        return $this->isSameUser($user) || $this->userIsAdmin($this->security->getUser());
     }
 
     public function edit(FormInterface $form, UserPasswordHasher $userPasswordHasher, User $user): void
