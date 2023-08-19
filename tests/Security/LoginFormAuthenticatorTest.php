@@ -60,7 +60,8 @@ class LoginFormAuthenticatorTest extends WebTestCase
                 ['_csrf_token', '', 'some_token'],
             ]);
 
-        $requestMock->request = $parameterBagMock; // Associate ParameterBag mock to request mock
+        // Associate ParameterBag mock to request mock
+        $requestMock->request = $parameterBagMock;
 
         $authenticator = new LoginFormAuthenticator($this->urlGeneratorMock);
         $passport = $authenticator->authenticate($requestMock);

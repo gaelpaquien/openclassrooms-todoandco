@@ -28,7 +28,7 @@ class TaskService
             return true;
         }
 
-        return 'anonymous@email.com' === $task->getAuthor()->getEmail();
+        return $task->getAuthor()->getEmail() === 'anonymous@email.com';
     }
 
     public function list(): array
