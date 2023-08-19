@@ -103,19 +103,21 @@ class UserControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         // User is logged and he is the profile owner. Try to edit with an existing email (not the same as the user's email)
-        // $this->client->loginUser($this->user);
-        // $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', ['id' => $this->user->getId()]));
-        // $form = $crawler->selectButton('Modifier mon compte')->form();
-        // $form['user[email]'] = 'user02@email.com';
-        // $form['user[username]'] = 'user01-test';
-        // $form['user[password][first]'] = 'Password?123';
-        // $form['user[password][second]'] = 'Password?123';
-        // $form['user[roles]'] = ['ROLE_USER'];
-        // $this->client->submit($form);
-        // $this->client->followRedirect();
-        // $this->assertSelectorTextContains('div.alert.alert-danger', 'Oops ! Cette adresse email est déjà utilisée.');
+        $this->client->loginUser($this->user);
+        $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', ['id' => $this->user->getId()]));
+        $form = $crawler->selectButton('Modifier mon compte')->form();
+        $form['user[email]'] = 'user02@email.com';
+        $form['user[username]'] = 'user01-test';
+        $form['user[password][first]'] = 'Password?123';
+        $form['user[password][second]'] = 'Password?123';
+        $form['user[roles]'] = ['ROLE_USER'];
+        $this->client->submit($form);
+        $this->client->followRedirect();
+        $this->client->followRedirect();
+        $this->assertSelectorTextContains('div.alert.alert-danger', 'Oops ! Cette adresse email est déjà utilisée.');
 
         // User is logged and he is the profile owner. Try to edit with the new email
+        $this->client->loginUser($this->user);
         $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', ['id' => $this->user->getId()]));
         $form = $crawler->selectButton('Modifier mon compte')->form();
         $form['user[email]'] = 'new-email@email.com';
