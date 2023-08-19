@@ -21,7 +21,7 @@ class UpdateTaskAuthorCommandTest extends TestCase
         $userRepository->method('findOneBy')->willReturn($anonymousUser);
 
         $tasks = [
-            new Task(), // Utilisez simplement une instance concrète de Task
+            new Task(),
             new Task()
         ];
 
@@ -42,13 +42,13 @@ class UpdateTaskAuthorCommandTest extends TestCase
     public function testNoAnonymousUserFound()
     {
         $userRepository = $this->createMock(UserRepository::class);
-        $userRepository->method('findOneBy')->willReturn(null); // Retourner null pour simuler qu'aucun utilisateur n'a été trouvé
+        $userRepository->method('findOneBy')->willReturn(null);
 
         $taskRepository = $this->createMock(TaskRepository::class);
-        $taskRepository->method('findBy')->willReturn([]); // Pas nécessaire, mais pour garder la cohérence
+        $taskRepository->method('findBy')->willReturn([]);
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager->expects($this->never())->method('flush'); // Le flush ne doit jamais être appelé dans ce scénario
+        $entityManager->expects($this->never())->method('flush');
 
         $command = new UpdateTaskAuthorCommand($entityManager, $taskRepository, $userRepository);
         $commandTester = new CommandTester($command);
@@ -56,7 +56,7 @@ class UpdateTaskAuthorCommandTest extends TestCase
         $commandTester->execute([]);
 
         $this->assertStringContainsString('Aucun utilisateur anonyme trouvé', $commandTester->getDisplay());
-        $this->assertSame(1, $commandTester->getStatusCode()); // Vérifier que la commande retourne une erreur
+        $this->assertSame(1, $commandTester->getStatusCode());
     }
 
 }

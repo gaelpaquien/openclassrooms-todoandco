@@ -5,7 +5,6 @@ namespace App\Tests\Controller;
 use App\Controller\SecurityController;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 class SecurityControllerTest extends WebTestCase
