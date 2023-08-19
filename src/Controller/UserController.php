@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -75,29 +77,29 @@ class UserController extends AbstractController
         }
 
         // Check if user is the same as the logged in or if the user is admin
-        if (!$this->userService->userIsAdmin($this->getUser()) && !$this->userService->isSameUser($user)) {
+        if (!$this->userService->isSameUser($user) && !$this->userService->userIsAdmin($this->getUser())) {
             $this->addFlash('error', 'Vous ne pouvez pas modifier ce compte.');
 
             return $this->redirectToRoute('app_default');
         }
 
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             // Check if email already exists and if it's not the same as the user's email
-            if ($this->userService->emailExist($form->get('email')->getData()) && !$this->userService->isSameEmail($form->get('email')->getData(), $user)) {
+            if ($this->userService->emailTakenByAnotherUser($form->get('email')->getData(), $user)) {
                 $this->addFlash('error', 'Cette adresse email est déjà utilisée.');
 
                 return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
             }
 
-            $this->userService->edit($form, $userPasswordHasher, $user);
+            if ($form->isValid()) {
+                $this->userService->edit($form, $userPasswordHasher, $user);
+                $this->addFlash('success', 'Le compte a bien été modifié.');
 
-            $this->addFlash('success', "Le compte a bien été modifié.");
-
-            return $this->redirectToRoute('app_default');
+                return $this->redirectToRoute('app_default');
+            }
         }
 
         return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);

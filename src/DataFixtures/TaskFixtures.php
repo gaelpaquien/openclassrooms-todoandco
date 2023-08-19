@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Task;
@@ -11,12 +13,12 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i=0; $i < 4; $i++) {
-            $this->createTaskWithAuthor($manager, 'Task User '.(0).($i+1), $i);
+        for ($i = 0; $i < 4; ++$i) {
+            $this->createTaskWithAuthor($manager, 'Task User ' . 0 . ($i + 1), $i);
         }
 
-        for ($i=0; $i < 6; $i++) {
-            $this->createTaskWithoutAuthor($manager, 'Task Anonymous '.(0).($i+1));
+        for ($i = 0; $i < 6; ++$i) {
+            $this->createTaskWithoutAuthor($manager, 'Task Anonymous ' . 0 . ($i + 1));
         }
 
         $manager->flush();
@@ -27,8 +29,8 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
         $task = new Task();
         $task->setTitle($title);
         $task->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.');
-        $task->setAuthor($this->getReference('user-'.$reference));
-        $task->setIsDone(rand(0, 1));
+        $task->setAuthor($this->getReference('user-' . $reference));
+        $task->setIsDone((bool) \random_int(0, 1));
 
         $manager->persist($task);
     }
@@ -39,7 +41,7 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
         $task->setTitle($title);
         $task->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.');
         $task->setAuthor(null);
-        $task->setIsDone(rand(0, 1));
+        $task->setIsDone((bool) \random_int(0, 1));
 
         $manager->persist($task);
     }

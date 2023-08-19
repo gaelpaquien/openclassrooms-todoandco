@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Task;
@@ -62,21 +64,17 @@ class TaskController extends AbstractController
         }
 
         // If task author is not anonymous, check if the user is the author of the task
-        if (!$this->taskService->authorIsAnonymous($task)) {
-            if (!$this->taskService->userIsAuthor($task)) {
-                $this->addFlash('error', 'Vous ne pouvez pas modifier une tâche dont vous n\'êtes pas l\'auteur.');
+        if (!$this->taskService->authorIsAnonymous($task) && !$this->taskService->userIsAuthor($task)) {
+            $this->addFlash('error', 'Vous ne pouvez pas modifier une tâche dont vous n\'êtes pas l\'auteur.');
 
-                return $this->redirectToRoute('task_list');
-            }
+            return $this->redirectToRoute('task_list');
         }
 
         // If task author is anonymous, check if the user is admin
-        if ($this->taskService->authorIsAnonymous($task)) {
-            if (!$this->userService->userIsAdmin($this->getUser())) {
-                $this->addFlash('error', 'Seul un administrateur peut modifier une tâche anonyme.');
+        if ($this->taskService->authorIsAnonymous($task) && !$this->userService->userIsAdmin($this->getUser())) {
+            $this->addFlash('error', 'Seul un administrateur peut modifier une tâche anonyme.');
 
-                return $this->redirectToRoute('task_list');
-            }
+            return $this->redirectToRoute('task_list');
         }
 
         $form = $this->createForm(TaskType::class, $task);
@@ -108,32 +106,27 @@ class TaskController extends AbstractController
         }
 
         // If task author is not anonymous, check if the user is the author of the task
-        if (!$this->taskService->authorIsAnonymous($task)) {
-            if (!$this->taskService->userIsAuthor($task)) {
-                $this->addFlash('error', 'Vous ne pouvez pas modifier l\'état d\'une tâche dont vous n\'êtes pas l\'auteur.');
+        if (!$this->taskService->authorIsAnonymous($task) && !$this->taskService->userIsAuthor($task)) {
+            $this->addFlash('error', 'Vous ne pouvez pas modifier l\'état d\'une tâche dont vous n\'êtes pas l\'auteur.');
 
-                return $this->redirectToRoute('task_list');
-            }
-            $this->addFlash('error', 'Vous ne pouvez pas modifier cette tâche.');
+            return $this->redirectToRoute('task_list');
         }
 
         // If task author is anonymous, check if the user is admin
-        if ($this->taskService->authorIsAnonymous($task)) {
-            if (!$this->userService->userIsAdmin($this->getUser())) {
-                $this->addFlash('error', 'Seul un administrateur peut modifier l\'état d\'une tâche dont l\'auteur est anonyme.');
+        if ($this->taskService->authorIsAnonymous($task) && !$this->userService->userIsAdmin($this->getUser())) {
+            $this->addFlash('error', 'Seul un administrateur peut modifier l\'état d\'une tâche dont l\'auteur est anonyme.');
 
-                return $this->redirectToRoute('task_list');
-            }
+            return $this->redirectToRoute('task_list');
         }
 
         $this->taskService->toggle($task);
 
         if ($task->isDone()) {
-            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+            $this->addFlash('success', 'La tâche a bien été marquée comme terminée.');
         }
 
         if (!$task->isDone()) {
-            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non terminée.', $task->getTitle()));
+            $this->addFlash('success', 'La tâche a bien été marquée comme non terminée.');
         }
 
         return $this->redirectToRoute('task_list');
@@ -150,21 +143,17 @@ class TaskController extends AbstractController
         }
 
         // If task author is not anonymous, check if the user is the author of the task
-        if (!$this->taskService->authorIsAnonymous($task)) {
-            if (!$this->taskService->userIsAuthor($task)) {
-                $this->addFlash('error', 'Vous ne pouvez pas supprimer une tâche dont vous n\'êtes pas l\'auteur.');
+        if (!$this->taskService->authorIsAnonymous($task) && !$this->taskService->userIsAuthor($task)) {
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer une tâche dont vous n\'êtes pas l\'auteur.');
 
-                return $this->redirectToRoute('task_list');
-            }
+            return $this->redirectToRoute('task_list');
         }
 
         // If task author is anonymous, check if the user is admin
-        if ($this->taskService->authorIsAnonymous($task)) {
-            if (!$this->userService->userIsAdmin($this->getUser())) {
-                $this->addFlash('error', 'Seul un administrateur peut supprimer une tâche dont l\'auteur est anonyme.');
+        if ($this->taskService->authorIsAnonymous($task) && !$this->userService->userIsAdmin($this->getUser())) {
+            $this->addFlash('error', 'Seul un administrateur peut supprimer une tâche dont l\'auteur est anonyme.');
 
-                return $this->redirectToRoute('task_list');
-            }
+            return $this->redirectToRoute('task_list');
         }
 
         $this->taskService->delete($task);

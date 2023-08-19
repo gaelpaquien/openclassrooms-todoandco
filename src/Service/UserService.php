@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\User;
@@ -20,12 +22,12 @@ class UserService
 
     public function userIsLogged(): bool
     {
-        return $this->security->getUser() !== null;
+        return $this->security->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface;
     }
 
     public function userIsAdmin($user): bool
     {
-        return in_array('ROLE_ADMIN', $user->getRoles());
+        return \in_array('ROLE_ADMIN', $user->getRoles(), true);
     }
 
     public function isSameUser($user): bool
@@ -35,17 +37,19 @@ class UserService
 
     public function emailExist($email): bool
     {
-        return $this->userRepository->findOneBy(['email' => $email]) !== null;
+        return $this->userRepository->findOneBy(['email' => $email]) instanceof \App\Entity\User;
     }
 
-    public function isSameEmail($email, $user): bool
+    public function emailTakenByAnotherUser($email, $user): bool
     {
-        return $email === $user->getEmail();
+        $foundUser = $this->userRepository->findOneBy(['email' => $email]);
+
+        return $foundUser && $foundUser->getId() !== $user->getId();
     }
 
     public function list(): array
     {
-       return $this->userRepository->findAll();
+        return $this->userRepository->findAll();
     }
 
     public function create(FormInterface $form, UserPasswordHasher $userPasswordHasher, User $user): void
@@ -55,11 +59,6 @@ class UserService
 
         $this->em->persist($user);
         $this->em->flush();
-    }
-
-    public function canEdit($user): bool
-    {
-        return $this->isSameUser($user) || $this->userIsAdmin($this->security->getUser());
     }
 
     public function edit(FormInterface $form, UserPasswordHasher $userPasswordHasher, User $user): void

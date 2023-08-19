@@ -2,6 +2,7 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Task;
 use PHPUnit\Framework\TestCase;
 use App\Entity\User;
 
@@ -57,13 +58,35 @@ class UserTest extends TestCase
     public function testGetTasks()
     {
         $user = new User();
-        $this->assertEmpty($user->getTasks());
+        $this->assertCount(0, $user->getTasks());
     }
 
     public function testAddTask()
     {
         $user = new User();
-        $this->assertInstanceOf(User::class, $user->addTask(null));
+        $task = $this->getMockBuilder(Task::class)
+           ->disableOriginalConstructor()
+           ->getMock();
+        $task->method('getAuthor')->willReturn($user);
+
+        $user->addTask($task);
+
+        $this->assertCount(1, $user->getTasks());
+        $this->assertSame($task, $user->getTasks()[0]);
     }
 
+    public function testRemoveTask()
+    {
+        $user = new User();
+        $task = $this->getMockBuilder(Task::class)
+                     ->disableOriginalConstructor()
+                     ->getMock();
+        $task->method('getAuthor')->willReturn($user);
+
+        $user->addTask($task);
+        $this->assertCount(1, $user->getTasks());
+
+        $user->removeTask($task);
+        $this->assertCount(0, $user->getTasks());
+    }
 }

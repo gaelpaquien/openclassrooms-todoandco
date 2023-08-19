@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Repository\TaskRepository;
@@ -34,7 +36,7 @@ class TaskService
         return $this->taskRepository->findAllOrderBy('createdAt', 'DESC');
     }
 
-    public function create($task): void
+    public function create(object $task): void
     {
         // Set the author on the task
         $task->setAuthor($this->security->getUser());
@@ -55,10 +57,9 @@ class TaskService
         $this->em->flush();
     }
 
-    public function delete($task): void
+    public function delete(object $task): void
     {
         $this->em->remove($task);
         $this->em->flush();
     }
-
 }

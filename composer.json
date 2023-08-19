@@ -78,6 +78,20 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "rector": "rector process ./src --clear-cache",
+        "phpcs": "phpcs ./src --standard=PSR12 --report=code -p",
+        "phpcsfixer": "php-cs-fixer fix ./src --config=.php-cs-fixer.dist.php -v --diff --ansi",
+        "phpcbf": "phpcbf ./src --standard=PSR12 -p",
+        "linter": [
+            "@phpcs",
+            "@phpcsfixer --dry-run",
+            "@rector --dry-run"
+        ],
+        "fix-linter": [
+            "@phpcsfixer",
+            "@rector",
+            "@phpcbf"
         ]
     },
     "conflict": {
@@ -90,8 +104,12 @@
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^7.2",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "friendsofphp/php-cs-fixer": "^3.23",
         "phpunit/phpunit": "^9",
+        "rector/rector": "^0.18.0",
+        "squizlabs/php_codesniffer": "*",
         "symfony/browser-kit": "6.3.*",
         "symfony/css-selector": "6.3.*",
         "symfony/debug-bundle": "6.3.*",
