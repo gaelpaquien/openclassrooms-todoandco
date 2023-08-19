@@ -43,7 +43,7 @@ class UpdateTaskAuthorCommand extends Command
         if (!$anonymousUser instanceof \App\Entity\User) {
             $output->writeln('Aucun utilisateur anonyme trouvé');
 
-            return 1; // Equivalent to returning Command::FAILURE
+            return 1;
         }
 
         $tasks = $this->taskRepository->findBy(['author' => null]);
@@ -56,6 +56,6 @@ class UpdateTaskAuthorCommand extends Command
 
         $output->writeln(\count($tasks) . ' tâches ont été modifiées avec succès');
 
-        return 0; // Equivalent to returning Command::SUCCESS
+        return 0;
     }
 }
