@@ -58,5 +58,4 @@ class UpdateTaskAuthorCommandTest extends TestCase
         $this->assertStringContainsString('Aucun utilisateur anonyme trouvé', $commandTester->getDisplay());
         $this->assertSame(1, $commandTester->getStatusCode());
     }
-
 }
