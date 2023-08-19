@@ -14,7 +14,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 # Installation of Xdebug
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN echo "xdebug.mode = coverage" >> /usr/local/etc/php/php.ini
-RUN echo "zend_extension = xdebug" >> /usr/local/etc/php/php.ini
+
 
 # Modify PHP configuration (memory_limit = -1)
 RUN echo "memory_limit = -1" >> /usr/local/etc/php/php.ini
