@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -20,7 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank(message: 'L\'adresse email ne peut pas être vide.')]
-    #[Assert\Email(message: 'Cette adresse email n\'est pas valide.')]
+    #[Assert\Email(message: "Cette adresse email n'est pas valide.")]
     #[Assert\Length(
         min: 6,
         max: 255,
@@ -32,9 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Le mot de passe ne peut pas être vide.')]
     #[Assert\Length(
@@ -57,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(
         min: 3,
         max: 25,
-        minMessage: 'Le nom d\'utilisateur doit comporter au moins 3 caractères.', 
+        minMessage: 'Le nom d\'utilisateur doit comporter au moins 3 caractères.',
         maxMessage: 'Le nom d\'utilisateur doit comporter au maximum 25 caractères.'
     )]
     private ?string $username = null;
@@ -103,7 +102,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return \array_unique($roles);
     }
 
     public function setRoles(array $roles): static
@@ -157,11 +156,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeTask(Task $task): static
     {
-        if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
-            if ($task->getAuthor() === $this) {
-                $task->setAuthor(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->tasks->removeElement($task) && $task->getAuthor() === $this) {
+            $task->setAuthor(null);
         }
 
         return $this;

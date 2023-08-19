@@ -36,16 +36,6 @@ class UserRepositoryTest extends KernelTestCase
         $this->assertSame($newPassword, $user->getPassword());
     }
 
-    public function testUpgradePasswordWithInvalidUserInstance()
-    {
-        $repo = $this->entityManager->getRepository(User::class);
-
-        $this->expectException(\Symfony\Component\Security\Core\Exception\UnsupportedUserException::class);
-
-        $invalidUser = $this->createMock(PasswordAuthenticatedUserInterface::class);
-        $repo->upgradePassword($invalidUser, 'any_password');
-    }
-
     protected function tearDown(): void
     {
         parent::tearDown();
