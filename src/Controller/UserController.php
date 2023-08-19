@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
 use App\Service\UserService;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,12 +72,14 @@ class UserController extends AbstractController
         // Check if the user is logged in
         if (!$this->userService->userIsLogged()) {
             $this->addFlash('error', 'Vous devez être connecté pour modifier un compte.');
+
             return $this->redirectToRoute('app_login');
         }
 
         // Check if user is the same as the logged in or if the user is admin
         if (!$this->userService->isSameUser($user) && !$this->userService->userIsAdmin($this->getUser())) {
             $this->addFlash('error', 'Vous ne pouvez pas modifier ce compte.');
+
             return $this->redirectToRoute('app_default');
         }
 
@@ -93,12 +96,12 @@ class UserController extends AbstractController
 
             if ($form->isValid()) {
                 $this->userService->edit($form, $userPasswordHasher, $user);
-                $this->addFlash('success', "Le compte a bien été modifié.");
+                $this->addFlash('success', 'Le compte a bien été modifié.');
 
                 return $this->redirectToRoute('app_default');
             }
         }
+
         return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }
-
 }

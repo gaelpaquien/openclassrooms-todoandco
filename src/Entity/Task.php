@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
@@ -38,7 +40,7 @@ class Task
     private ?string $content = null;
 
     #[ORM\Column]
-    private ?bool $isDone = null;
+    private ?bool $isDone = false;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     private ?User $author = null;
@@ -46,7 +48,6 @@ class Task
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
-        $this->isDone = false;
     }
 
     public function getId(): ?int
@@ -102,7 +103,7 @@ class Task
         return $this;
     }
 
-    public function toggle($flag)
+    public function toggle(?bool $flag): void
     {
         $this->isDone = $flag;
     }

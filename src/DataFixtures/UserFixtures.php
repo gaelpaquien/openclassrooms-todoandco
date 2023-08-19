@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\User;
@@ -16,8 +18,8 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for ($i=0; $i < 5; $i++) {
-            $this->createUser($manager, 'user'.(0).($i+1).'@email.com', 'user'.(0).($i+1), $i);
+        for ($i = 0; $i < 5; ++$i) {
+            $this->createUser($manager, 'user' . 0 . ($i + 1) . '@email.com', 'user' . 0 . ($i + 1), $i);
         }
 
         $this->createAdmin($manager);
@@ -35,7 +37,7 @@ class UserFixtures extends Fixture
         $user->setRoles(['ROLE_USER']);
         $user->setUsername($username);
 
-        $this->addReference('user-'.$reference, $user);
+        $this->addReference('user-' . $reference, $user);
 
         $manager->persist($user);
     }
