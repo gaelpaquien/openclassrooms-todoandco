@@ -85,7 +85,7 @@ composer install
 ```
 <br />
 
-5. **Setting up the database**<br /> *If you are using docker, the first command is not necessary*
+5. **Setting up the database**<br /><br />  *If you are using docker, the first command is not necessary*
 ```bash
 php bin/console doctrine:database:create
 ```
