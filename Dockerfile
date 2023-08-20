@@ -7,7 +7,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     curl \
     unzip \
     libzip-dev \
-    && docker-php-ext-install pdo pdo_mysql zip \
+    libicu-dev \
+    && docker-php-ext-install pdo pdo_mysql zip intl \
     && a2enmod rewrite \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -15,8 +16,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN echo "xdebug.mode = coverage" >> /usr/local/etc/php/php.ini
 
-
-# Modify PHP configuration (memory_limit = -1)
+# Modify PHP configuration
 RUN echo "memory_limit = -1" >> /usr/local/etc/php/php.ini
 
 # Enable Apache mod_rewrite
@@ -42,6 +42,10 @@ WORKDIR /var/www/html
 
 # Copy application source
 COPY . /var/www/html
+
+# Set permissions for var/cache and var/log
+RUN chown -R www-data:www-data /var/www/html/var \
+    && chmod -R 775 /var/www/html/var
 
 # Create a new apache configuration file
 RUN echo '\
