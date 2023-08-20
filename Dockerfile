@@ -43,9 +43,6 @@ WORKDIR /var/www/html
 # Copy application source
 COPY . /var/www/html
 
-# Permissions
-RUN chmod -R 777 var && chown -R www-data:www-data var
-
 # Create a new apache configuration file
 RUN echo '\
 <Directory /var/www/html/public>\n\
