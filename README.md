@@ -85,7 +85,8 @@ composer install
 ```
 <br />
 
-5. **Setting up the database**<br /><br />  *If you are using docker, the first command is not necessary*
+5. **Setting up the database**<br />
+*If you are using docker, the first command is not necessary*
 ```bash
 php bin/console doctrine:database:create
 ```
@@ -105,7 +106,9 @@ symfony server:start
 php -S 127.0.0.1:8080 -t public
 ```
 
-7. **Other information**<br />
+--- --- ---
+
+### Other information
 *Run the tests (use the test environment)*
 ```bash
 php bin/phpunit
