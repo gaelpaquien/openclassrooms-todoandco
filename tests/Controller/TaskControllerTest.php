@@ -192,4 +192,3 @@ class TaskController extends WebTestCase
         $this->assertSelectorTextContains('div.alert.alert-success', 'La tâche a bien été supprimée.');
     }
 }
-
