@@ -65,8 +65,8 @@ class UserTest extends TestCase
     {
         $user = new User();
         $task = $this->getMockBuilder(Task::class)
-           ->disableOriginalConstructor()
-           ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
         $task->method('getAuthor')->willReturn($user);
 
         $user->addTask($task);
