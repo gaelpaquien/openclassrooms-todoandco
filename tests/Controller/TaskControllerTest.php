@@ -134,7 +134,8 @@ class TaskController extends WebTestCase
         $this->client->followRedirect();
         if ($initialState) {
             $this->assertSelectorTextContains('div.alert.alert-success', 'La tâche a bien été marquée comme non terminée.');
-        } else {
+        }
+        if (!$initialState) {
             $this->assertSelectorTextContains('div.alert.alert-success', 'La tâche a bien été marquée comme terminée.');
         }
 
@@ -152,7 +153,8 @@ class TaskController extends WebTestCase
         $this->client->followRedirect();
         if ($initialStateAdmin) {
             $this->assertSelectorTextContains('div.alert.alert-success', 'La tâche a bien été marquée comme non terminée.');
-        } else {
+        }
+        if (!$initialStateAdmin) {
             $this->assertSelectorTextContains('div.alert.alert-success', 'La tâche a bien été marquée comme terminée.');
         }
     }

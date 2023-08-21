@@ -30,7 +30,7 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
         $task->setTitle($title);
         $task->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.');
         $task->setAuthor($this->getReference('user-' . $reference));
-        $task->setIsDone((bool) \random_int(0, 1));
+        $task->setIsDone(true);
 
         $manager->persist($task);
     }
@@ -41,7 +41,7 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
         $task->setTitle($title);
         $task->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.');
         $task->setAuthor(null);
-        $task->setIsDone((bool) \random_int(0, 1));
+        $task->setIsDone(false);
 
         $manager->persist($task);
     }
