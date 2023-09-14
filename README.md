@@ -1,3 +1,14 @@
+# Summary
+- [Summary](#summary)
+- [PHP/Symfony application developer training - OpenclassRooms (P8)](#phpsymfony-application-developer-training---openclassrooms-p8)
+  - [Improve an existing application: ToDo \& Co](#improve-an-existing-application-todo--co)
+    - [Skills assessed](#skills-assessed)
+    - [Setting up the project](#setting-up-the-project)
+      - [Required](#required)
+      - [Installation](#installation)
+    - [Other information](#other-information)
+    - [Links](#links)
+
 # PHP/Symfony application developer training - OpenclassRooms (P8)
 
 ## Improve an existing application: ToDo & Co
