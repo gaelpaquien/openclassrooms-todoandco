@@ -125,5 +125,5 @@ php bin/console app:update-task-author
  --- --- ---
 
 ### Links
-[Link to the website]() *(https://todo-and-co.gael-paquien.fr)* <br />
+[Link to the website](https://todo-and-co.gael-paquien.fr) <br />
 [Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-todo-and-co/dashboard)
