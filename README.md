@@ -1,14 +1,3 @@
-# Summary
-- [Summary](#summary)
-- [PHP/Symfony application developer training - OpenclassRooms (P8)](#phpsymfony-application-developer-training---openclassrooms-p8)
-  - [Improve an existing application: ToDo \& Co](#improve-an-existing-application-todo--co)
-    - [Skills assessed](#skills-assessed)
-    - [Setting up the project](#setting-up-the-project)
-      - [Required](#required)
-      - [Installation](#installation)
-    - [Other information](#other-information)
-    - [Links](#links)
-
 # PHP/Symfony application developer training - OpenclassRooms (P8)
 
 ## Improve an existing application: ToDo & Co
@@ -136,5 +125,5 @@ php bin/console app:update-task-author
  --- --- ---
 
 ### Links
-[Link to the website]() *(SOON)* <br />
+[Link to the website]() *(https://todo-and-co.gael-paquien.fr)* <br />
 [Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-todo-and-co/dashboard)
