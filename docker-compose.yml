@@ -29,16 +29,16 @@ services:
     ports:
       - 8025:8025
 
-  # newrelic-infra:
-  #   image: newrelic/infrastructure:latest
-  #   network_mode: host
-  #   pid: host
-  #   privileged: true
-  #   volumes:
-  #     - "/:/host:ro"
-  #     - "/var/run/docker.sock:/var/run/docker.sock"
-  #   env_file:
-  #     - .env.local
+  newrelic-infra:
+    image: newrelic/infrastructure:latest
+    network_mode: host
+    pid: host
+    privileged: true
+    volumes:
+      - "/:/host:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    env_file:
+      - .env.local
 
 volumes:
   database_data: {}
