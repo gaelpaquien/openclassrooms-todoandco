@@ -1,4 +1,4 @@
-# PHP/Symfony application developer training - OpenclassRooms (P8)
+# PHP/Symfony application developer - OpenClassrooms (Project 8)
 
 ## Improve an existing application: ToDo & Co
 
@@ -11,8 +11,6 @@
 6. Establish a plan to reduce the technical debt of an application
 7. Provide corrective patches when testing suggests so
 8. Propose a series of improvements
-
---- --- ---
 
 ### Setting up the project
 
@@ -106,8 +104,6 @@ symfony server:start
 php -S 127.0.0.1:8080 -t public
 ```
 
---- --- ---
-
 ### Other information
 *Run the tests (use the test environment)*
 ```bash
@@ -122,8 +118,9 @@ php bin/phpunit --coverage-html tests/test-coverage
 php bin/console app:update-task-author
 ```
 
- --- --- ---
+--- --- ---
 
 ### Links
-[Link to the website](https://todo-and-co.gael-paquien.fr) <br />
+[Website](https://todo-and-co.gael-paquien.fr)\
+[Repository archive containing all deliverables](https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-8)\
 [Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-todo-and-co/dashboard)
