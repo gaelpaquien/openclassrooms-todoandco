@@ -1,4 +1,4 @@
-# PHP/Symfony application developer - OpenClassrooms (Project 8)
+# PHP/Symfony Application Developer - OpenClassrooms (Project 8)
 
 ## Improve an existing application: ToDo & Co
 
