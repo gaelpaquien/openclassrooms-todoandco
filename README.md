@@ -22,11 +22,7 @@
 5. [Docker](https://www.docker.com/) (*optional*)
 
 #### Installation
-1. **Clone the repository**
-```bash
-git clone https://github.com/Galuss1/openclassrooms-todo-and-co.git
-```
-<br />
+1. **Clone the repository on the main branch**
 
 2. **Create the .env.local file and replace the values of the .env origin file**
 ```bash
@@ -69,19 +65,16 @@ MAILER_DSN=#smtp://host:1025
 #NEW_RELIC_DAEMON_LOG_LEVEL=#newrelic_daemon_log_level(default: info)#
 ###< docker/newrelic ###
 ```
-<br />
 
 3. **If you are using docker, install your environment**
 ```bash
 docker-compose up --build -d
 ```
-<br />
 
 4. **Installing dependencies**
 ```bash
 composer install
 ```
-<br />
 
 5. **Setting up the database**<br />
 *If you are using docker, the first command is not necessary*
@@ -94,7 +87,6 @@ php bin/console doctrine:schema:create
 ```bash
 php bin/console doctrine:fixtures:load
 ```
-<br />
 
 6. **Start the project**
 ```bash
