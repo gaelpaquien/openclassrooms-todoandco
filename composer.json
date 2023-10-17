@@ -1,4 +1,12 @@
 {
+    "name": "training/todoandco",
+    "authors": [
+        {
+            "name": "Gaël PAQUIEN",
+            "email": "contact@gaelpaquien.com",
+            "homepage": "https://www.gaelpaquien.com"
+        }
+    ],
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",

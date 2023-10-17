@@ -1,4 +1,4 @@
-# Install PHP with Apache
+# Use the official PHP 8.2 image with Apache
 FROM php:8.2-apache
 
 # Set user variables
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN pecl install xdebug && docker-php-ext-enable xdebug && \
     echo "xdebug.mode = coverage" >> /usr/local/etc/php/php.ini
 
-# Modify PHP configuration
+# Add custom php.ini settings
 RUN echo "memory_limit = -1" >> /usr/local/etc/php/php.ini
 
 # Install Composer
@@ -29,7 +29,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -sS https://get.symfony.com/cli/installer | bash \
     && mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
-# Install New Relic Agent
+# Install New Relic Agent (uncomment the following lines if you want to use New Relic and replace YOUR_NR_KEY with your New Relic license key)
 # RUN curl -L https://download.newrelic.com/php_agent/release/newrelic-php5-10.11.0.3-linux.tar.gz | tar -C /tmp -zx && \
 #     export NR_INSTALL_USE_CP_NOT_LN=1 && \
 #     export NR_INSTALL_SILENT=1 && \
@@ -45,7 +45,7 @@ COPY . /var/www/html
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 775 /var/www/html/
 
-# Configure Apache for Symfony
+# Apache configuration
 RUN echo '<Directory /var/www/html/public>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\

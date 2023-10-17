@@ -1,3 +1,12 @@
-RewriteEngine on
+# Disable PHP error display (prod only)
+# php_flag display_errors off
+
+RewriteEngine On
+
+# Force redirection to HTTPS (prod only)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect all requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
