@@ -5,7 +5,7 @@ apache2-foreground &
 sleep 5
 
 # Log a message to indicate the start of Apache
-echo "start.sh : Apache started in the foreground"
+echo "start.sh : Apache started"
 
 # Wait for MySQL to start
 until nc -z -v -w30 database 3306
@@ -15,7 +15,7 @@ do
 done
 
 # Log a message to indicate the start of MySQL
-echo "start.sh : MySQL started, the script resumes"
+echo "start.sh : MySQL started"
 
 # Change directory to the project root
 cd /var/www/html
