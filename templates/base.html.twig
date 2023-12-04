@@ -8,110 +8,112 @@
     <meta name="description" content="ToDo List App, gérez vos tâches en toute simplicité !">
     <meta name="author" content="Todo and Co">
     <title>ToDo List App</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}" />
-
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-
     <!-- Custom CSS -->
-    <link href="{{ asset('assets/css/shop-homepage.css') }}" rel="stylesheet">
-
-    <!-- Bootstrap JS -->
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}" defer></script>
-
+    <link href="{{ asset('assets/css/style.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/479a452331.js" crossorigin="anonymous"></script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 </head>
 
 <body>
     <main>
         <div class="content">
-            <nav class="navbar bg-body-tertiary fixed-top" style="background-color: #e3f2fd;">
-                <div class="container-fluid">
-                    <div class="navbar-header mx-5">
-                        <a class="navbar-brand" href="{{ path('app_default') }}">ToDo List App</a>
-                        <img src="{{ asset('assets/img/logo-oc.png') }}" alt="OpenClassrooms" />
-                    </div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+            <!-- Navigation + Top headband -->
+            <div class="fixed-top" id="navigation-fixed">
+                {% include "default/topHeadband.html.twig" %}
+                <nav class="navbar bg-body-tertiary" style="background-color: #e3f2fd;">
+                    <div class="container-fluid">
+                        <div class="navbar-header mx-5">
+                            <a class="navbar-brand" href="{{ path('app_default') }}">ToDo List App</a>
                         </div>
-                        <div class="offcanvas-body">
-                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                {% if 'app_default' != app.request.attributes.get('_route') %}
-                                    <li class="nav-item">
-                                        <a href="{{ path('app_default')}}" class="nav-link mx-2">Accueil</a>
-                                    </li>
-                                {% endif %}
-                                {% if app.user and is_granted('ROLE_ADMIN') %}
-                                    <li class="nav-item">
-                                        <a href="{{ path('user_list') }}" class="nav-link mx-2">Liste des comptes</a>
-                                    </li>
-                                {% endif %}
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                            aria-labelledby="offcanvasNavbarLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                    {% if 'app_default' != app.request.attributes.get('_route') %}
+                                        <li class="nav-item">
+                                            <a href="{{ path('app_default')}}" class="nav-link mx-2">Accueil</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if app.user and is_granted('ROLE_ADMIN') %}
+                                        <li class="nav-item">
+                                            <a href="{{ path('user_list') }}" class="nav-link mx-2">Liste des comptes</a>
+                                        </li>
+                                    {% endif %}
 
-                                {% if app.user %}
-                                    <li class="nav-item">
-                                        <a href="{{ path('user_edit', {'id' : app.user.id }) }}" class="nav-link mx-2">Modifier mon compte</a>
-                                    </li>
-                                {% endif %}
+                                    {% if app.user %}
+                                        <li class="nav-item">
+                                            <a href="{{ path('user_edit', {'id' : app.user.id }) }}" class="nav-link mx-2">Modifier mon compte</a>
+                                        </li>
+                                    {% endif %}
 
-                                {% if app.user and 'task_create' != app.request.attributes.get('_route') %}
-                                    <li class="nav-item">
-                                        <a href="{{ path('task_create') }}" class="nav-link mx-2">Créer une tâche</a>
-                                    </li>
-                                {% endif %}
+                                    {% if app.user and 'task_create' != app.request.attributes.get('_route') %}
+                                        <li class="nav-item">
+                                            <a href="{{ path('task_create') }}" class="nav-link mx-2">Créer une tâche</a>
+                                        </li>
+                                    {% endif %}
 
-                                {% if 'task_list' != app.request.attributes.get('_route') %}
-                                    <li class="nav-item">
-                                        <a href="{{ path('task_list') }}" class="nav-link mx-2">Liste des tâches</a>
-                                    </li>
-                                {% endif %}
+                                    {% if 'task_list' != app.request.attributes.get('_route') %}
+                                        <li class="nav-item">
+                                            <a href="{{ path('task_list') }}" class="nav-link mx-2">Liste des tâches</a>
+                                        </li>
+                                    {% endif %}
 
-                                {% if not app.user and 'user_create' != app.request.attributes.get('_route') %}
-                                    <li class="nav-item">
-                                        <a href="{{ path('user_create') }}" class="nav-link mx-2">S'inscrire</a>
-                                    </li>
-                                {% endif %}
+                                    {% if not app.user and 'user_create' != app.request.attributes.get('_route') %}
+                                        <li class="nav-item">
+                                            <a href="{{ path('user_create') }}" class="nav-link mx-2">S'inscrire</a>
+                                        </li>
+                                    {% endif %}
 
-                                {% if not app.user and 'app_login' != app.request.attributes.get('_route') %}
-                                    <li class="nav-item">
-                                        <a href="{{ path('app_login') }}" class="nav-link mx-2">Se connecter</a>
-                                    </li>
-                                {% endif %}
+                                    {% if not app.user and 'app_login' != app.request.attributes.get('_route') %}
+                                        <li class="nav-item">
+                                            <a href="{{ path('app_login') }}" class="nav-link mx-2">Se connecter</a>
+                                        </li>
+                                    {% endif %}
 
-                                {% if app.user %}
-                                    <li class="nav-item">
-                                        <a href="{{ path('app_logout') }}" class="nav-link mx-2" style="colod: #ff0000;">Se
-                                            déconnecter</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
+                                    {% if app.user %}
+                                        <li class="nav-item">
+                                            <a href="{{ path('app_logout') }}" class="nav-link mx-2" style="colod: #ff0000;">Se
+                                                déconnecter</a>
+                                        </li>
+                                    {% endif %}
+
+                                        <li class="nav-item">
+                                            <a href="{{ path('app_legal_notice')}}" class="nav-link mx-2">Mentions légales</a>
+                                        </li>
+                                </ul>
+                            </div>
+                            <div class="offcanvas-footer d-flex justify-content-center">
+                                <p class="text-center mb-0">Copyright 2023 &copy; <a href="https://www.gaelpaquien.com" target="_blank">Gaël PAQUIEN</a></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
 
+            <!-- Header -->
             {% block header_img %}
-                <img class="slide-image mb-4" src="{{ asset('assets/img/todolist.jpg') }}" alt="todo list">
+                <img class="header-img mb-4" src="{{ asset('assets/img/todolist.jpg') }}" alt="Bannière de l'application Todo & Co" id="header-img">
             {% endblock %}
-
             {% block header_title %}{% endblock %}
 
+            <!-- Popup -->
+            {% include "default/popup.html.twig" %}
+
+            <!-- Scroll to top -->
+            <button onclick="topFunction()" class="scrollToTop" id="scrollToTop"><i class="fa-solid fa-chevron-up"></i></button>
+
+            <!-- Flash messages -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -129,6 +131,7 @@
                 </div>
             </div>
 
+            <!-- Body -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -136,12 +139,14 @@
                     </div>
                 </div>
             </div>
+
         </div>
-
-        <footer class="fixed-bottom d-flex justify-content-center">
-            <p class="text-center mb-0">Copyright &copy; OpenClassrooms</p>
-        </footer>
     </main>
-</body>
 
+    <!-- Custom JS -->
+    <script src="/assets/js/popup.min.js" async></script>
+    <script src="/assets/js/index.min.js" async></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}" defer></script>
+</body>
 </html>

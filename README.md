@@ -19,7 +19,8 @@ https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-applicat
 
 2. **Create the .env.local file and replace the values of the .env origin file**
 
-3. **Only if you are using Docker, environment installation**
+3. **Only if you are using Docker, environment installation** \
+*You can change the build target file in docker-compose.yml (Dockerfile.dev or Dockerfile.prod)*
 ```bash
 docker-compose up --build
 ```

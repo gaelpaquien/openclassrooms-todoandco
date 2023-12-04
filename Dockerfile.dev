@@ -3,7 +3,7 @@ FROM php:8.2-apache
 
 # Install system dependencies, PHP extensions, and enable Apache mod_rewrite
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y git curl unzip libzip-dev libicu-dev && \
+    apt-get install -y git curl unzip libzip-dev libicu-dev netcat-openbsd && \
     docker-php-ext-install pdo pdo_mysql zip intl && \
     a2enmod rewrite && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
