@@ -69,5 +69,5 @@ php bin/console app:update-task-author
 
 ### Links
 [Website](https://www.formation.todoandco.gaelpaquien.com)\
-[Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-todo-and-co/dashboard)
+[Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-todo-and-co/dashboard)\
 [Old repository containing training deliverables](https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-8)
