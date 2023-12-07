@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="ToDo List App, gérez vos tâches en toute simplicité !">
     <meta name="author" content="Todo and Co">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}" />
+
     <title>ToDo List App</title>
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -26,7 +28,15 @@
                 <nav class="navbar bg-body-tertiary" style="background-color: #e3f2fd;">
                     <div class="container-fluid">
                         <div class="navbar-header mx-5">
-                            <a class="navbar-brand" href="{{ path('app_default') }}">ToDo List App</a>
+                            <div class="navbar-brand">
+                                <a href="{{ path('app_default') }}">ToDo List App </a>
+                                <span>
+                                    by 
+                                </span>
+                                <a href="https://www.gaelpaquien.com" target="_blank">
+                                    <img src="../assets/img/logo.svg" alt="Logo" width="48" height="48">
+                                </a>
+                            </div>
                         </div>
                         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
