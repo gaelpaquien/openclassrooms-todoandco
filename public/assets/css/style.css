@@ -191,7 +191,7 @@ a {
 
 .popup-context {
     width: 100%;
-    padding: 10px;
+    padding: 0px 10px;
     box-sizing: border-box;
     word-wrap: break-word;
 }
@@ -218,7 +218,7 @@ a {
 }
 
 .popup-body div {
-    margin-bottom: 15px;
+    margin-top: 10px;
 }
 
 .popup-content ul {
