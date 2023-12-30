@@ -184,11 +184,9 @@ a {
     align-items: center;
     flex-direction: column;
     overflow-y: auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
   }
-
-.popup-content {
+  
+  .popup-content {
     background: #fff;
     border-radius: 22px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -198,48 +196,48 @@ a {
     transform: translate(-50%, -50%);
     z-index: 1001;
     width: 60%;
-}
-
-.popup-content ul {
+  }
+  
+  .popup-content ul {
     list-style: initial;
-}
-
-.popup-header {
+  }
+  
+  .popup-header {
     border-bottom: 1px solid #000;
     padding: 15px;
-}
-
-.popup-body div {
+  }
+  
+  .popup-body div {
     margin-top: 10px;
     padding: 10px;
-}
-
-.popup h3, .popup h2 {
+  }
+  
+  .popup h3, .popup h2 {
     text-align: center;
-}
-
-.popup-context {
+  }
+  
+  .popup-context {
     width: 100%;
     box-sizing: border-box;
     word-wrap: break-word;
-}
-
-.popup-context div {
+  }
+  
+  .popup-context div {
     padding: 0;
-}
-
-.popup-context p {
+  }
+  
+  .popup-context p {
     text-align: justify;
     margin-bottom: 10px;
-}
-
-.popup-footer {
+  }
+  
+  .popup-footer {
     border-top: 1px solid #000;
     padding: 15px;
     text-align: center;
-}
-
-.popup-footer ul {
+  }
+  
+  .popup-footer ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -249,68 +247,77 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-}
-
-.popup-footer li {
+  }
+  
+  .popup-footer li {
     margin: 0;
-}
-
-.popup-footer a,
-.popup-footer a:visited {
-    text-decoration: none;
-    color : #0000EE;
-}
-
-.popup-footer a:hover {
-    text-decoration: underline;
-}
-
-@media (max-width: 1300px) {
+  }
+  
+  .popup-footer a,
+  .popup-footer a:visited {
+      text-decoration: none;
+      color : #0000EE;
+  }
+  
+  .popup-footer a:hover {
+      text-decoration: underline;
+  }
+  
+  @media (max-width: 1300px) {
     .popup-content {
-        width: 80%;
+      width: 80%;
     }
-
+  
     .popup-header h2 {
-        font-size: 1rem;
+      font-size: 1rem;
     }
-
+  
     .popup-content h3 {
-        font-size: 0.9rem;
+      font-size: 0.9rem;
     }
-
+  
     .popup-content p,
     .popup-content ul {
-        font-size: 0.8rem;
+      font-size: 0.8rem;
     }
-
+  
     .popup-footer ul {
-        gap: 5px;
+      gap: 5px;
     }
-}
-
-@media (max-width: 500px) {
+  }
+  
+  @media (max-width: 550px) {
     .popup-content {
-        width: 90%;
-        margin-top: 10px;
+      width: 90%;
+      margin-top: 20px;
     }
-
+  
     .popup-header h2 {
-        font-size: 0.8rem;
+      font-size: 0.7rem;
     }
-
+  
     .popup-content h3 {
-        font-size: 0.7rem;
+      font-size: 0.7rem;
     }
-
+  
     .popup-content p,
     .popup-content ul {
-        font-size: 0.6rem;
+      font-size: 0.6rem;
     }
-
+  
+    .popup-context p {
+      margin-bottom: 5px;
+    }
+  
+    .popup-footer {
+      padding: 5px;
+    }
+  
     .popup-footer ul {
-        gap: 3px;
+      margin-top: 5px;
+      gap: 2px;
     }
-}
+  }
 
 @media screen and (max-width: 992px) {
     .task-list-card-header {
