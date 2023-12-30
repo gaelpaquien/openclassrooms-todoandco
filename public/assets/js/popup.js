@@ -10,6 +10,7 @@ triggerButton.addEventListener('click', (e) => {
     e.preventDefault();
     popup.style.display = 'block';
     navigation.style.position = 'static';
+    navigation.style.display = 'none';
     headerImg.style.marginTop = '0';
 });
 
@@ -18,5 +19,6 @@ closeButton.addEventListener('click', (e) => {
     e.preventDefault();
     popup.style.display = 'none';
     navigation.style.position = 'fixed';
+    navigation.style.display = 'block';
     headerImg.style.marginTop = '100px';
 });
