@@ -65,6 +65,7 @@ composer install --no-dev
 # Clean the Symfony cache in PROD mode
 echo "maintenance.sh: Clean the Symfony cache in PROD mode"
 php bin/console cache:clear --env=prod
+php bin/console cache:warmup --env=prod
 
 # Send a confirmation email
 # subject="Blog PHP - Daily maintenance"

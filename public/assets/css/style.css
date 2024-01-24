@@ -172,152 +172,147 @@ a {
 
 /* Popup */
 .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.popup-content {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  width: 50%;
+}
+
+.popup-content h3, .popup-content h2 {
+  text-align: center;
+}
+
+.popup-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-header {
+  border-bottom: 1px solid #000;
+  padding: 15px;
+}
+
+.popup-body p {
+  margin: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+}
+
+.popup-context {
+  margin-top: 30px;
+}
+
+.popup-tasks {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.popup-footer {
+  border-top: 1px solid #000;
+  padding: 15px;
+  text-align: center;
+}
+
+.popup-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.popup-footer li {
+  margin: 0;
+}
+
+.popup-footer a,
+.popup-footer a:visited {
+    text-decoration: none;
+    color : #0000EE;
+}
+
+.popup-footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1300px) {
   .popup-content {
-    background: #fff;
-    border-radius: 22px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1001;
-    width: 60%;
+    width: 80%;
   }
-  
+
+  .popup-content h2 {
+    font-size: 1rem;
+  }
+
+  .popup-content h3 {
+    font-size: 0.9rem;
+  }
+
+  .popup-content p,
   .popup-content ul {
-    list-style: initial;
+    font-size: 0.8rem;
   }
-  
-  .popup-header {
-    border-bottom: 1px solid #000;
-    padding: 15px;
+
+  .popup-content ul {
+    gap: 5px;
   }
-  
-  .popup-body div {
-    margin-top: 10px;
-    padding: 10px;
+}
+
+@media (max-width: 550px) {
+  .popup-content {
+    width: 90%;
+    margin-top: 20px;
   }
-  
-  .popup h3, .popup h2 {
-    text-align: center;
+
+  .popup-content p,
+  .popup-content ul {
+    font-size: 0.6rem;
   }
-  
-  .popup-context {
-    width: 100%;
-    box-sizing: border-box;
-    word-wrap: break-word;
-  }
-  
-  .popup-context div {
-    padding: 0;
-  }
-  
-  .popup-context p {
-    text-align: justify;
-    margin-bottom: 10px;
-  }
-  
+
   .popup-footer {
-    border-top: 1px solid #000;
-    padding: 15px;
-    text-align: center;
+    padding: 5px;
   }
-  
+
   .popup-footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    margin-top: 5px;
+    gap: 2px;
   }
-  
-  .popup-footer li {
-    margin: 0;
+
+  .popup-context {
+    margin-top: 20px;
   }
-  
-  .popup-footer a,
-  .popup-footer a:visited {
-      text-decoration: none;
-      color : #0000EE;
+
+  .popup-tasks {
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
-  
-  .popup-footer a:hover {
-      text-decoration: underline;
-  }
-  
-  @media (max-width: 1300px) {
-    .popup-content {
-      width: 80%;
-    }
-  
-    .popup-header h2 {
-      font-size: 1rem;
-    }
-  
-    .popup-content h3 {
-      font-size: 0.9rem;
-    }
-  
-    .popup-content p,
-    .popup-content ul {
-      font-size: 0.8rem;
-    }
-  
-    .popup-footer ul {
-      gap: 5px;
-    }
-  }
-  
-  @media (max-width: 550px) {
-    .popup-content {
-      width: 90%;
-      margin-top: 20px;
-    }
-  
-    .popup-header h2 {
-      font-size: 0.7rem;
-    }
-  
-    .popup-content h3 {
-      font-size: 0.7rem;
-    }
-  
-    .popup-content p,
-    .popup-content ul {
-      font-size: 0.6rem;
-    }
-  
-    .popup-context p {
-      margin-bottom: 5px;
-    }
-  
-    .popup-footer {
-      padding: 5px;
-    }
-  
-    .popup-footer ul {
-      margin-top: 5px;
-      gap: 2px;
-    }
-  }
+}
 
 @media screen and (max-width: 992px) {
     .task-list-card-header {
