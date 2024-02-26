@@ -1,5 +1,10 @@
 # OpenClassrooms - ToDo & Co
 
+## Description
+Audit (quality and performance) of an existing application to identify the tasks necessary for its improvement.\
+Optimization and reduction of the technical debt of this application.\
+This project was carried out as part of a training course. Below you will find the link to the initial repository containing all the training deliverables.
+
 ## Setting up
 
 ### Required
@@ -10,6 +15,7 @@
 ### Optional
 1. [Docker](https://www.docker.com/)
 2. [Symfony CLI](https://symfony.com/download)
+3. [New Relic API KEY](https://newrelic.com/)
 
 ### Installation
 1. **Clone the repository on the main branch**
