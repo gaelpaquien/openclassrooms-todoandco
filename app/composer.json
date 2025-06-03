@@ -4,7 +4,7 @@
         {
             "name": "Gaël PAQUIEN",
             "email": "contact@gaelpaquien.com",
-            "homepage": "https://www.gaelpaquien.com"
+            "homepage": "https://gaelpaquien.com"
         }
     ],
     "type": "project",
@@ -87,10 +87,10 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "rector": "rector process ./src --clear-cache",
-        "phpcs": "phpcs ./src --standard=PSR12 --report=code -p",
-        "phpcsfixer": "php-cs-fixer fix ./src --config=.php-cs-fixer.dist.php -v --diff --ansi",
-        "phpcbf": "phpcbf ./src --standard=PSR12 -p",
+        "rector": "rector process src --clear-cache",
+        "phpcs": "phpcs src --standard=PSR12 --report=code -p",
+        "phpcsfixer": "php-cs-fixer fix src --config=.php-cs-fixer.dist.php -v --diff --ansi",
+        "phpcbf": "phpcbf src --standard=PSR12 -p",
         "linter": [
             "@phpcs",
             "@phpcsfixer --dry-run",

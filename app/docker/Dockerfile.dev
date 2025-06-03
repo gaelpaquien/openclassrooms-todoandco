@@ -1,0 +1,46 @@
+FROM php:8.2-fpm-alpine
+
+ENV COMPOSER_VERSION=2.8.0 \
+    SYMFONY_CLI_VERSION=5.10.0
+
+RUN apk add --no-cache \
+        zlib-dev icu-dev zip libzip-dev curl bash autoconf make gcc libc-dev linux-headers && \
+    docker-php-ext-install intl pdo pdo_mysql zip && \
+    pecl install xdebug && docker-php-ext-enable xdebug && \
+    apk del autoconf make gcc libc-dev linux-headers
+
+RUN curl -sS https://getcomposer.org/installer | php -- \
+    --install-dir=/usr/local/bin \
+    --filename=composer \
+    --version=${COMPOSER_VERSION}
+
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "aarch64" ]; then ARCH="arm64"; else ARCH="amd64"; fi && \
+    curl -sSL -o symfony.tar.gz \
+    https://github.com/symfony-cli/symfony-cli/releases/download/v${SYMFONY_CLI_VERSION}/symfony-cli_linux_${ARCH}.tar.gz && \
+    tar xzf symfony.tar.gz && \
+    mv symfony /usr/local/bin/symfony && \
+    rm symfony.tar.gz
+
+# RUN curl -L https://download.newrelic.com/php_agent/release/newrelic-php5-10.11.0.3-linux.tar.gz | tar -C /tmp -zx && \
+#     export NR_INSTALL_USE_CP_NOT_LN=1 && \
+#     export NR_INSTALL_SILENT=1 && \
+#     export NR_INSTALL_KEY="YOUR_NR_KEY" && \
+#     /tmp/newrelic-php5-*/newrelic-install install && \
+#     rm -rf /tmp/newrelic-php5-* /tmp/nrinstall*
+
+RUN addgroup -g 1000 appgroup && adduser -D -G appgroup -u 1000 appuser
+
+COPY /app/docker/scripts/build.dev.sh /usr/local/bin/scripts/
+RUN chmod +x /usr/local/bin/scripts/build.dev.sh
+
+WORKDIR /var/www
+
+RUN mkdir -p var/cache var/log && \
+    chown -R appuser:appgroup var/
+
+USER appuser
+
+ENTRYPOINT ["/usr/local/bin/scripts/build.dev.sh"]
+
+CMD ["php-fpm"]
