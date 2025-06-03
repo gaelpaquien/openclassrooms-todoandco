@@ -15,9 +15,10 @@ composer install --no-dev --optimize-autoloader --classmap-authoritative --no-in
 echo "Optimizing environment variables..."
 composer dump-env prod || exit 1
 
-echo "Setting up database..."
-php bin/console doctrine:database:create --if-not-exists --env=prod --no-interaction || exit 1
-php bin/console doctrine:migrations:migrate --env=prod --no-interaction || exit 1
+echo "Setting up database...."
+php bin/console doctrine:database:create --env=prod --if-not-exists --no-interaction
+php bin/console doctrine:schema:update --env=prod --force --no-interaction
+php bin/console doctrine:fixtures:load --env=prod --no-interaction
 
 echo "Clearing cache..."
 php bin/console cache:clear --env=prod --no-interaction || exit 1
