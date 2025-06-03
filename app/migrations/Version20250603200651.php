@@ -11,7 +11,7 @@ final class Version20250603220000 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add demo data';
+        return 'Add test data for demo';
     }
 
     public function up(Schema $schema): void
@@ -26,20 +26,20 @@ final class Version20250603220000 extends AbstractMigration
             ('anonymous@email.com', '\$2y\$13\$AH0uREOmhSGEysA7NoV5P.EfhXP9/YzY.7vvmuK42W5KwYZPbVajm', '[\"ROLE_USER\"]', 'anonymous')
         ");
 
-        $this->addSql("INSERT INTO task (title, content, is_done, author_id) VALUES 
-            ('Task User 01', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 1, 1),
-            ('Task User 02', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 1, 2),
-            ('Task User 03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 1, 3),
-            ('Task User 04', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 1, 4)
+        $this->addSql("INSERT INTO task (title, content, is_done, author_id, created_at) VALUES 
+            ('Task User 01', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 1, 1, NOW()),
+            ('Task User 02', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 1, 2, NOW()),
+            ('Task User 03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 1, 3, NOW()),
+            ('Task User 04', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 1, 4, NOW())
         ");
 
-        $this->addSql("INSERT INTO task (title, content, is_done, author_id) VALUES 
-            ('Task Anonymous 01', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL),
-            ('Task Anonymous 02', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL),
-            ('Task Anonymous 03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL),
-            ('Task Anonymous 04', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL),
-            ('Task Anonymous 05', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL),
-            ('Task Anonymous 06', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL)
+        $this->addSql("INSERT INTO task (title, content, is_done, author_id, created_at) VALUES 
+            ('Task Anonymous 01', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL, NOW()),
+            ('Task Anonymous 02', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL, NOW()),
+            ('Task Anonymous 03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL, NOW()),
+            ('Task Anonymous 04', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL, NOW()),
+            ('Task Anonymous 05', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL, NOW()),
+            ('Task Anonymous 06', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.', 0, NULL, NOW())
         ");
     }
 
