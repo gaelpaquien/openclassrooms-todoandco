@@ -1,0 +1,26 @@
+FROM php:8.2-fpm-alpine
+
+ENV COMPOSER_VERSION=2.8.0
+
+RUN apk add --no-cache \
+        zlib-dev icu-dev zip libzip-dev curl bash autoconf make gcc libc-dev && \
+    docker-php-ext-install intl pdo pdo_mysql zip opcache && \
+    apk del autoconf make gcc libc-dev
+
+RUN curl -sS https://getcomposer.org/installer | php -- \
+    --install-dir=/usr/local/bin \
+    --filename=composer \
+    --version=${COMPOSER_VERSION}
+
+RUN addgroup -g 1002 appgroup && adduser -D -G appgroup -u 1002 appuser
+
+COPY /app/docker/scripts/build.prod.sh /usr/local/bin/scripts/
+RUN chmod +x /usr/local/bin/scripts/build.prod.sh
+
+WORKDIR /var/www
+
+USER appuser
+
+ENTRYPOINT ["/usr/local/bin/scripts/build.prod.sh"]
+
+CMD ["php-fpm"]
