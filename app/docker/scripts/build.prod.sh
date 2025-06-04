@@ -6,7 +6,7 @@ echo "Starting building app in PROD environment..."
 
 if [ ! -f .env.local ]; then
   echo "Creating .env.local from .env..."
-  cp .env .env.local
+  cp .env .env.local || exit 1
 fi
 
 echo "Installing dependencies..."
