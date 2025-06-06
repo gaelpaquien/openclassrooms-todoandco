@@ -1,5 +1,13 @@
+networks:
+  default:
+  mysql-shared:
+    external: true
+
 services:
   app:
+    networks:
+      - default
+      - mysql-shared
     build:
       context: .
       dockerfile: app/docker/Dockerfile.prod
@@ -12,6 +20,8 @@ services:
     restart: unless-stopped
 
   nginx:
+    networks:
+      - default
     image: nginx:alpine
     ports:
       - "8081:80"
@@ -27,16 +37,3 @@ services:
       retries: 10
       start_period: 30s
     restart: unless-stopped
-
-  mysql:
-    image: mysql:8.0
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    env_file:
-      - ./app/.env.local
-    restart: unless-stopped
-
-volumes:
-  mysql-data:
