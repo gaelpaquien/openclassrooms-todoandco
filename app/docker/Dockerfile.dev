@@ -36,9 +36,6 @@ RUN chmod +x /usr/local/bin/scripts/build.dev.sh
 
 WORKDIR /var/www
 
-RUN mkdir -p var/cache var/log && \
-    chown -R appuser:appgroup var/
-
 USER appuser
 
 ENTRYPOINT ["/usr/local/bin/scripts/build.dev.sh"]
