@@ -14,8 +14,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 
 RUN addgroup -g 1002 appgroup && adduser -D -G appgroup -u 1002 appuser
 
-COPY /app/docker/scripts/build.prod.sh /usr/local/bin/scripts/
-RUN chmod +x /usr/local/bin/scripts/build.prod.sh
+COPY /app/docker/scripts/* /usr/local/bin/scripts/
+RUN chmod +x /usr/local/bin/scripts/*
 
 WORKDIR /var/www
 
